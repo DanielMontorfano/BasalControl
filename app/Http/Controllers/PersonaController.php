@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Persona;
 use App\Models\Ficha;
+use App\Models\Material;
 use Illuminate\Http\Request;
 
 
@@ -97,7 +98,7 @@ class PersonaController extends Controller
      */
     public function show(Persona $persona)
     {   
-        return view('personas.ver');
+        return view('personas.view');
     }
 
     /**
@@ -149,8 +150,171 @@ class PersonaController extends Controller
     }
     
     
+    public function conSalida1(Request $request){
+        //dd(request()->all());
+        // Validar los datos del formulario
+        $personaId=$request->persona;
+        $fichaId=$request->ficha_id;  //utilizado para retorno3
+        $selector=$request->salidaTipo;
+        //$selector = $request->input('salidaTipo');
+        $validatedData = null;
+       // dd(request()->all()); 
+        //*********************** Retorno1 ************************************************ */
+       // if($selector==="retorno1"){ //proviene de salida1 reperesenta caminando con materiales
+               
+           $descripcion = $request->input('descripcion');
+           $cantidad = $request->input('cantidad');
+           $unidad = $request->input('unidad');
+          //dd(request()->all());  
+          $this->validate($request, [
+            
+            'descripcion.*'=> 'required',
+            'seccionautoriza'=> 'required',
+            'destino'=> 'required',
+            'autorizasalida'=> 'required',
+            'nombrevigilanteout'=> 'required',
+             
+        ], [
+            'descripcion.required' => 'Ingresar descripcion',
+            'seccionautoriza.required' => 'Ingresar de que sección proviene',
+            'destino.required' => 'Ingresar el destino',
+            'autorizasalida.required' => 'Ingresar quién autoriza la salida.',
+            'nombrevigilanteout.required' => 'Ingresar destino del material.',
+            
+            
+        ]);
 
+          $validatedData = $request->validate([
+            'descripcion.*' => 'required',
+            'cantidad.*' => 'required|numeric|gt:0',
+            'unidad.*' => 'required',
+           // 'seccionautoriza'=> 'required',
+           // 'destino'=> 'required',
+           // 'autorizasalida'=> 'required',
+           // 'nombrevigilanteout'=> 'required',
+           
+        ]);
+       
+        $materialesIds = [];
+        
+            foreach ($validatedData['descripcion'] as $key => $value) {
+                $material = new Material;
+                $material->descripcion = $validatedData['descripcion'][$key];
+                $material->cantidad = $validatedData['cantidad'][$key];
+                $material->unidad = $validatedData['unidad'][$key];
+                $material->save();
+                $materialesIds[] = $material->id;
+            }
+            
+        // Vincular los IDs de materiales con el ID de la persona en la tabla pivot "persona_materials"
+        //$personaId = 5; // Reemplaza con el ID de la persona que quieras vincular los materiales
+        $persona = Persona::find($personaId);
+        
+        $persona->ingreso='salió'; //Es para indicar que la persona salió
+        $persona -> save();
+        //La siguiente linea guarda datos de vinculo en la tabla PersonaMaterial
+        $persona->personasMaterials()->attach($materialesIds); //Funciona pero no guarda time_at y udated_at ver planProtoController
+        $ficha= Ficha::find($fichaId);
+        $ficha->seccionautoriza=$request->seccionautoriza;
+        $ficha->destino=$request->destino;
+        $ficha->autorizasalida=$request->autorizasalida;
+        $ficha->nombrevigilanteout=$request->nombrevigilanteout;
+        $ficha -> save();
+        //dd(request()->all());  
+        return redirect()->route('personas.index');
+    }
 
+    public function conSalida2(Request $request){
+       // dd(request()->all());
+        // Validar los datos del formulario
+        $personaId=$request->persona;
+        $fichaId=$request->ficha_id;  //utilizado para retorno3
+        $selector=$request->salidaTipo;
+        if($selector=="retorno2"){ //proviene de salida2 reperesenta caminando con materiales
+            $persona = Persona::find($personaId);
+            $persona->ingreso='salió'; //Es para indicar que la persona salió s/materiales caminando
+            $persona -> save();
+        return redirect()->route('personas.index');
+
+        } 
+    }
+
+    public function conSalida3(Request $request){
+        //dd(request()->all());
+        // Validar los datos del formulario
+        $personaId=$request->persona;
+        $fichaId=$request->ficha_id;  //utilizado para retorno3
+        $selector=$request->salidaTipo;
+        //$selector = $request->input('salidaTipo');
+        $validatedData = null;
+       // dd(request()->all()); 
+        //*********************** Retorno1 ************************************************ */
+       // if($selector==="retorno1"){ //proviene de salida1 reperesenta caminando con materiales
+               
+           $descripcion = $request->input('descripcion');
+           $cantidad = $request->input('cantidad');
+           $unidad = $request->input('unidad');
+          //dd(request()->all());  
+          $this->validate($request, [
+            
+            'descripcion.*'=> 'required',
+            'seccionautoriza'=> 'required',
+            'destino'=> 'required',
+            'autorizasalida'=> 'required',
+            'nombrevigilanteout'=> 'required',
+             
+        ], [
+            'descripcion.required' => 'Ingresar descripcion',
+            'seccionautoriza.required' => 'Ingresar de que sección proviene',
+            'destino.required' => 'Ingresar el destino',
+            'autorizasalida.required' => 'Ingresar quién autoriza la salida.',
+            'nombrevigilanteout.required' => 'Ingresar destino del material.',
+            
+            
+        ]);
+
+          $validatedData = $request->validate([
+            'descripcion.*' => 'required',
+            'cantidad.*' => 'required|numeric|gt:0',
+            'unidad.*' => 'required',
+           // 'seccionautoriza'=> 'required',
+           // 'destino'=> 'required',
+           // 'autorizasalida'=> 'required',
+           // 'nombrevigilanteout'=> 'required',
+           
+        ]);
+       
+        $materialesIds = [];
+        
+            foreach ($validatedData['descripcion'] as $key => $value) {
+                $material = new Material;
+                $material->descripcion = $validatedData['descripcion'][$key];
+                $material->cantidad = $validatedData['cantidad'][$key];
+                $material->unidad = $validatedData['unidad'][$key];
+                $material->save();
+                $materialesIds[] = $material->id;
+            }
+            
+        // Vincular los IDs de materiales con el ID de la persona en la tabla pivot "persona_materials"
+        //$personaId = 5; // Reemplaza con el ID de la persona que quieras vincular los materiales
+        $persona = Persona::find($personaId);
+        
+        $persona->ingreso='salió'; //Es para indicar que la persona salió
+        $persona -> save();
+        //La siguiente linea guarda datos de vinculo en la tabla PersonaMaterial
+        $persona->personasMaterials()->attach($materialesIds); //Funciona pero no guarda time_at y udated_at ver planProtoController
+        $ficha= Ficha::find($fichaId);
+        $ficha->seccionautoriza=$request->seccionautoriza;
+        $ficha->destino=$request->destino;
+        $ficha->autorizasalida=$request->autorizasalida;
+        $ficha->nombrevigilanteout=$request->nombrevigilanteout;
+        /*IMPORTANTE: la unica dif. entre salida 1 y salida3 es la linea siguiente "SALE CON VEHICULO!!!!"*/
+        $ficha->ingreso='salió'; //Es para indicar que la persona con vehiculo salió  c/materiales y vehiculo
+        $ficha -> save();
+        
+        return redirect()->route('personas.index');
+    }
+    
 
     /**
      * Remove the specified resource from storage.

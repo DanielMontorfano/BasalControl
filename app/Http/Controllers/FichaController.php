@@ -41,6 +41,25 @@ class FichaController extends Controller
     {
         //dd ( $request->all());
         $ficha= new Ficha();
+        $this->validate($request, [
+            'patentevehiculo' => ['nullable', 'regex:/^[A-Z]{3}\s\d{3}$|^[A-Z]{2}\d{3}[A-Z]{2}$/'],
+            'patenteacoplado' => ['nullable', 'regex:/^[A-Z]{2}\d{3}[A-Z]{2}$/'],
+            'provieneDe' => 'required',
+            'A_quien' => 'required',
+            'nombrevigilanteIn' => 'required',
+             
+             
+        ], [
+            'patentevehiculo.regex' => 'Esta patente no es válida.',
+            'patenteacoplado.regex' => 'Esta patente no es válida.',
+            'provieneDe.required' => 'Es necesario saber de donde proviene.',
+            'A_quien.required' => 'Es necesario saber el contacto en el ingenio.',
+            'nombrevigilanteIn.required' => 'El nombre vigilador es obligatorio.',
+            
+        ]);
+        
+        
+        
        // $ficha->persona_id=$request->persona_id;
         $ficha->ingreso=$request->ingreso;
        // $ficha->nomEmpresa=$request->nomEmpresa;
@@ -65,9 +84,9 @@ class FichaController extends Controller
         $ficha->salida=$request->salida;
         $ficha->salidamateriales=$request->salidamateriales;
         $ficha->tipomateriales=$request->tipomateriales;
-        $ficha->remito=$request->remito;
+        $ficha->destino=$request->destino;
         $ficha->cantidad=$request->cantidad;
-        $ficha->contactoriogrande2=$request->contactoriogrande2;
+        $ficha->seccionautoriza=$request->seccionautoriza;
         $ficha->hora=$request->hora;
         $ficha->autorizasalida=$request->autorizasalida;
         $ficha->nombrevigilanteout=$request->nombrevigilanteout;

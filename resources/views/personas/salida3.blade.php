@@ -5,37 +5,49 @@
 @section('css')
 <style>
   
-  .fondo{
-       border:none;
-       margin-top: 40px;
-       /*width:400px; */
-       border-radius:15px;
-       color:rgb(237, 244, 168);
-       background-image: linear-gradient(to right top, #1b1b1d6f, #0b0a0b, #08032158, #100f10, #1e191b);
-   }
-   .boton{
+    .fondo{
+         border:none;
+         margin-top: 40px;
+         /*width:400px; */
+         border-radius:15px;
+         color:rgb(237, 244, 168);
+         background-image:linear-gradient(to right, #254360, #1f2b3a );
+     }
+     .boton{
+      
+      margin-bottom: 20px;
+      background: linear-gradient(to right,#1b1b1d6f,#0b0a0b);
+      margin-inline: 30px;
+     }
+     tr.new-row td {
+      border-top: none;
+  }
+   
+  h6 {
+      text-align: center;
+      font-size: 30px;
+      background: -webkit-linear-gradient(rgb(4, 83, 148), rgb(225, 225, 206));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      
+    }
     
-    margin-bottom: 20px;
-    background: linear-gradient(to right,#1b1b1d6f,#0b0a0b);
-    margin-inline: 30px;
-   }
-   tr.new-row td {
-    border-top: none;
-}
-
-</style>
+  
+  </style>
 
 @stop
 
 @section('content_header')
-    <h1>Salida 3 Tabla autoincremental</h1>
+<h6> Salida de materiales de canchón de fábrica</h6>
 @stop
 
 @section('content')
 
 <div class="container fondo" >
-    <form id="nuevoMatrial" action="{{route('materials.store')}}" method="POST">
+    <form id="nuevoMatrial" action="{{route('personas.conSalida3')}}" method="POST">
         @csrf
+        @method('put') 
         <input type="hidden" name="persona" value={{$persona->id}} readonly >
         <input type="hidden" name="ficha_id" value={{$persona->ficha_id}} readonly >
         <input type="hidden" name="salidaTipo" value="retorno3" readonly >
@@ -57,13 +69,59 @@
             </tr>
         </tbody>
     </table>
+    
+    <table id="table" class="table" style="color: rgb(209, 226, 208)">
+        <thead>
+            <tr align="center">
+                <th width=15%>Retirado por</th>
+                <th width=15%>Sección</th>
+                <th width=40%>Destino</th>
+                <th width=15%>Firmado por</th>
+                <th width=15%>Vigilador</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr align="center">
+                <td><input type="text" class="form-control" name="personanombre" value="{{$persona->nyapellido}}" readonly>
+                </td>
+                
+                <td><input type="text" class="form-control" name="seccionautoriza">
+                    @error('seccionautoriza')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </td>
+                
+                <td><input type="text" class="form-control" name="destino">
+                    @error('destino')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </td>
+                
+                <td><input type="text" class="form-control" name="autorizasalida">
+                    @error('autorizasalida')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </td>
+
+                <td><input type="text" class="form-control" name="nombrevigilanteout">
+                    @error('nombrevigilanteout')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+
     <div class="form-group d-flex justify-content-center">
         <button form="nuevoMatrial" class="btn btn-info  boton " type="submit" >Enviar</button>
         <a  class="btn btn-info ml-2  boton"  href="">&nbsp; Salir &nbsp;</a>
       </div>
 </form>
 </div>
-
+@include('partials.footer')
 @endsection
 
 @section('js')

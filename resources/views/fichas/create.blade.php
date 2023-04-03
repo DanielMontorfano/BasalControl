@@ -161,12 +161,20 @@ h6 {
           <div class="row" >  
             <div class="col col-md-3 form-group">
                   <div class="form-select mb-3">
-                  <input id="patentevehiculo" name="patentevehiculo" title="Patente del vehículo" type="text" class="mi-input form-control rounded custom" placeholder="Patente vehic.">
+                  <input id="patentevehiculo" name="patentevehiculo" title="Patente del vehículo" type="text" class="mi-input form-control rounded custom" placeholder="Patente vehic." value={{old('patentevehiculo')}}>
+                  @error('patentevehiculo')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                  @enderror
+                
+                
                 </div>
             </div>
             <div class="col col-md-3 form-group">
               <div class="form-select mb-3">
-                <input id="patenteacoplado" name="patenteacoplado" title="Patente del semi ó coplado" type="text" class="mi-input form-control rounded custom" placeholder="Patente chasis">
+                <input id="patenteacoplado" name="patenteacoplado" title="Patente del semi ó coplado" type="text" class="mi-input form-control rounded custom" placeholder="Patente chasis" value={{old('patenteacoplado')}}>
+                @error('patenteacoplado')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
               </div>
             </div> 
           </div> {{-- 1ra fila del card --}}
@@ -187,7 +195,7 @@ h6 {
             <label class="control-label" for="tipoIngreso">Ingreso</label> 
             <select id="tipoIngreso" name="tipoIngreso"  class="form-select mb-3" >
               
-              <option value="Vista">Visita</option>
+              <option value="Visita">Visita</option>
               <option value="Proveedor">Proveedor</option>
             </select>
           </div>
@@ -224,13 +232,19 @@ h6 {
       <div class="row" >
         <div class="col col-md-12"> 
           <input type="hidden" name="ingreso" value="En planta" readonly >
-          <input id="provieneDe" name="provieneDe" type="text" class="my-input form-control rounded custom" placeholder="¿De que empresa proviene?">
+          <input id="provieneDe" name="provieneDe" type="text" class="my-input form-control rounded custom" placeholder="¿De que empresa proviene?" value={{old('provieneDe')}}>
+          @error('provieneDe')
+          <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
         </div>
      </div>
 
       <div class="row" >
               <div class="col col-md-12"> 
-                <input id="A_quien" name="A_quien" type="text" class="my-input form-control rounded custom" placeholder="¿A quien visita?">
+                <input id="A_quien" name="A_quien" type="text" class="my-input form-control rounded custom" placeholder="¿A quien visita?" value={{old('A_quien')}}>
+                @error('A_quien')
+          <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
               </div>
        </div>
         <div class="row" >
@@ -275,8 +289,11 @@ h6 {
     
               <div class="row" >
                 <div class="col col-md-12">
-                    <input id="nombrevigilateIn" name="nombrevigilateIn" type="text" class="my-input form-control rounded custom" placeholder="Nombre y apellido del vigilador">
-                </div>
+                    <input id="nombrevigilanteIn" name="nombrevigilanteIn" type="text" class="my-input form-control rounded custom" placeholder="Nombre y apellido del vigilador" value={{old('nombrevigilanteIn')}}>
+                    @error('nombrevigilanteIn')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                  </div>
             </div>
       </div>
       

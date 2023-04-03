@@ -39,21 +39,33 @@ class MaterialController extends Controller
      */
     public function store(Request $request) //Genera material, vincula a la persona y da salida a la persona (retorno1) y persona con Auto (retorno3)
     {    
-
-       // dd(request()->all());
+        
+        dd(request()->all());
         // Validar los datos del formulario
         $personaId=$request->persona;
         $fichaId=$request->ficha_id;  //utilizado para retorno3
         $selector=$request->salidaTipo;
-
+        //$selector = $request->input('salidaTipo');
+        $validatedData = null;
+       // dd(request()->all()); 
         //*********************** Retorno1 ************************************************ */
-        if($selector=="retorno1"){ //proviene de salida1 reperesenta caminando con materiales
+        if($selector==="retorno1"){ //proviene de salida1 reperesenta caminando con materiales
+               
+           $descripcion = $request->input('descripcion');
+           $cantidad = $request->input('cantidad');
+           $unidad = $request->input('unidad');
+          // dd(request()->all());  
         $validatedData = $request->validate([
             'descripcion.*' => 'required',
-            'cantidad.*' => 'required',
+            'cantidad.*' => 'required|numeric|gt:0',
             'unidad.*' => 'required',
+           // 'seccionautoriza'=> 'required',
+           // 'destino'=> 'required',
+           // 'autorizasalida'=> 'required',
+           // 'nombrevigilanteout'=> 'required',
+           
         ]);
-        
+      // dd(request()->all()); 
         $materialesIds = [];
         
             foreach ($validatedData['descripcion'] as $key => $value) {
@@ -64,16 +76,26 @@ class MaterialController extends Controller
                 $material->save();
                 $materialesIds[] = $material->id;
             }
-        
+            
         // Vincular los IDs de materiales con el ID de la persona en la tabla pivot "persona_materials"
         //$personaId = 5; // Reemplaza con el ID de la persona que quieras vincular los materiales
         $persona = Persona::find($personaId);
+        
         $persona->ingreso='salió'; //Es para indicar que la persona salió
         $persona -> save();
         //La siguiente linea guarda datos de vinculo en la tabla PersonaMaterial
         $persona->personasMaterials()->attach($materialesIds); //Funciona pero no guarda time_at y udated_at ver planProtoController
+        $ficha= Ficha::find($fichaId);
+        $ficha->seccionautoriza=$request->seccionautoriza;
+        $ficha->destino=$request->destino;
+        $ficha->autorizasalida=$request->autorizasalida;
+        $ficha->nombrevigilanteout=$request->nombrevigilanteout;
+        $ficha -> save();
+        
         return redirect()->route('personas.index');
-        }  //Sale de retorno1
+            } else {
+                return back()->withErrors($validatedData);
+            }
         
         if($selector=="retorno2"){ //proviene de salida2 reperesenta caminando con materiales
             $persona = Persona::find($personaId);
@@ -131,7 +153,7 @@ class MaterialController extends Controller
 
             return redirect()->route('personas.index');
 
-            } //Sale de retorno3
+            } //Sale de retorno4
 
         
         

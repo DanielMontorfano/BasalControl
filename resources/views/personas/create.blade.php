@@ -52,6 +52,14 @@
     padding: 6px 12px;
     border: none;
   }
+
+  section {
+  background-color: #3d3b3b;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
 </style>
 
     
@@ -110,7 +118,7 @@
                                     <div class="form-group">
                                       <label>&nbsp;</label> {{-- etiqueta vacía --}}
                                       <div>
-                                          <button id="boton" form="enviaPersona"  class="btn btn-primary" type="submit" STYLE=" display:none; background: linear-gradient(to right,#495c5c,#030007);">Enviar</button>
+                                          <button id="boton" form="enviaPersona"  class="btn btn-primary" type="submit" STYLE=" background: linear-gradient(to right, #0e3761, #9cbfe7 );">OK</button>
                                       </div>
                                   </div>
                               
@@ -140,7 +148,9 @@
                     </div>
         </div>  {{-- div del row1 Principal --}}
     </div> {{-- div del container Principal--}}
-    
+   <section>
+    @include('partials.footer')
+   </section>
 @stop
 
 

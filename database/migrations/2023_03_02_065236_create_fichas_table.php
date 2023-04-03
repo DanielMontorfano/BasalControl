@@ -39,9 +39,9 @@ return new class extends Migration
             $table->string('salida')->nullable();
             $table->string('salidamateriales')->nullable();
             $table->string('tipomateriales')->nullable();
-            $table->string('remito')->nullable();
+            $table->string('destino')->nullable();
             $table->string('cantidad')->nullable();
-            $table->string('contactoriogrande2')->nullable();
+            $table->string('seccionautoriza')->nullable();
             $table->string('hora')->nullable();
             $table->string('autorizasalida')->nullable();
             $table->string('nombrevigilanteout')->nullable();

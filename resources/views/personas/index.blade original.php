@@ -93,7 +93,6 @@
     <thead class="table-dark" >
         
         <td>Persona</td>
-        <td>Ingresó</td> 
         <td>Tipo</td>
         <td>Empresa</td>
         <td>Estado</td>
@@ -104,14 +103,13 @@
       <tr STYLE="text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">
         
         <td STYLE="font-weight:bold; text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">{{$persona->nyapellido}}</td>
-        <td>{{$persona->created_at}}</td>
         <td>{{$persona->tipoIngreso}}</td>
         <td>{{$persona->provieneDe}}</td>
         <td>{{$persona->ingreso}}</td>
         @if($persona->ingreso =='En planta') {{-- Para saber si es repuesto o no --}}
         <td>
           <div class="d-flex">
-            <form action="{{route('personas.salida1', $persona->id)}}" method="GET">
+            <form action="{{route('personas.salida1', $persona->id, $persona->ficha_id)}}" method="GET">
               {{-- @csrf
               @method('put')  --}}
               <input type="hidden" name="salidaTipo" value="salida1" readonly >
@@ -122,9 +120,10 @@
                
               </button>
             </form>
-            <form action="{{route('personas.salida2', $persona->id)}}" method="GET">
-              {{-- @csrf
-              @method('put')  --}}
+            
+            <form action="{{route('personas.update', $persona->id)}}" method="POST">
+              @csrf
+             {{--  @method('put') --}}
               <input type="hidden" name="salidaTipo" value="salida2" readonly >
               <input hidden type="text" name="ingreso" value="salió" id="">
               <input  hidden type="text" name="ficha_id" value="{{$persona->ficha_id}}" id="">
@@ -134,9 +133,9 @@
               </button>
             </form>
             
-            <form action="{{route('personas.salida3', $persona->id)}}" method="GET">
-              {{-- @csrf
-              @method('put')  --}}
+            <form action="{{route('personas.update', $persona->id)}}" method="POST">
+              @csrf
+              @method('put') 
               <input type="hidden" name="salidaTipo" value="salida3" readonly >
               <input hidden type="text" name="ingreso" value="salió" id="">
               <input  hidden type="text" name="ficha_id" value="{{$persona->ficha_id}}" id="">
@@ -145,9 +144,9 @@
               
               </button>
             </form>
-            <form action="{{route('personas.update', $persona->id)}}" method="GET">
-              {{-- @csrf
-              @method('put')  --}}
+            <form action="{{route('personas.update', $persona->id)}}" method="POST">
+              @csrf
+             {{--  @method('put') --}}
               <input type="hidden" name="salidaTipo" value="salida4" readonly >
               <input hidden type="text" name="ingreso" value="salió" id="">
               <input  hidden type="text" name="ficha_id" value="{{$persona->ficha_id}}" id="">
@@ -156,7 +155,9 @@
               </button>
             </form>
             
-          </div>
+            
+            
+        </div>
           {{-- <a class="bi bi-eye" href="{{route('personas.show', $persona->id)}}"></a> --}}
         </td>
         @endif

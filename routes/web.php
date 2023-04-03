@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\FichaController;
 use App\Http\Controllers\MaterialController;
+use App\Models\Persona;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +18,30 @@ use App\Http\Controllers\MaterialController;
 |
 */
 
-Route::resource('personas', PersonaController::class);
-//Route::get('personas', [EquipoController::class, 'salida1'])->name('personas.salida1');
+Route::resource('personas', PersonaController::class); //Sale caminando con materiales
+Route::get('salida1/{personaId}', function($personaId){
+    $persona= Persona::find($personaId);
+    return view('personas.salida1', compact('persona',$persona->id, $persona->ficha_id));
+})->name('personas.salida1');
+Route::put('conSalida1', [PersonaController::class,'conSalida1'])->name('personas.conSalida1');
+
+Route::get('salida2/{personaId}', function($personaId){  //Sale caminando sin materiales
+    $persona= Persona::find($personaId);
+    return view('personas.salida2', compact('persona',$persona->id, $persona->ficha_id));
+})->name('personas.salida2');
+Route::put('conSalida2', [PersonaController::class,'conSalida2'])->name('personas.conSalida2');
+
+Route::get('salida3/{personaId}', function($personaId){  //Sale con vehiculo con materiales
+    $persona= Persona::find($personaId);
+    return view('personas.salida3', compact('persona',$persona->id, $persona->ficha_id));
+})->name('personas.salida3');
+Route::put('conSalida3', [PersonaController::class,'conSalida3'])->name('personas.conSalida3');
+
+
+
+
+
+
 
 
 Route::resource('fichas', FichaController::class);
