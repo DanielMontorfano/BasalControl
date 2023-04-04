@@ -103,7 +103,7 @@
       @foreach ($personas as $persona)
       <tr STYLE="text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">
         
-        <td STYLE="font-weight:bold; text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">{{$persona->nyapellido}}</td>
+        <td STYLE="font-weight:bold; text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; "> <a href="{{route('personas.show', $persona->id)}}"> {{$persona->nyapellido}} </a></td>
         <td>{{$persona->created_at}}</td>
         <td>{{$persona->tipoIngreso}}</td>
         <td>{{$persona->provieneDe}}</td>

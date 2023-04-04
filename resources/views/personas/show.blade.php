@@ -120,39 +120,34 @@ h6 {
     <div class="row" >
       <div class="col col-md-3 form-group">
             <label class="control-label" for="tipoVehiculo">Vehículo</label> 
-            <select id="tipoVehiculo" name="tipoVehiculo" cclass="form-select mb-3">
+            <select id="tipoVehiculo" name="tipoVehiculo" class="form-select mb-3">
              
-              <option value="Auto">Auto</option>
-              <option value="Pick-Up">Pick-Up</option>
-              <option value="Camión">Camión</option>
-              <option value="Grúa">Grúa</option>
-              <option value="Moto">Moto</option>
-              <option value="Otro">Otro</option>
+              <option value="">{{$ficha->tipoVehiculo}}</option>
+              
             </select>
           </div>
           <div class="col col-md-3 form-group">
             <label class="control-label" for="estadoVehiculo">Estado</label> 
             <select id="estadoVehiculo" name="estadoVehiculo" class="form-select mb-3">
               
-              <option value="Bueno">Bueno</option>
-              <option value="Regular">Regular</option>
-              <option value="Malo">Malo</option>
+              <option value="">{{$ficha->estadoVehiculo}}</option>
+             
             </select>
           </div>
           <div class="col col-md-3 form-group">
             <label class="control-label" for="revTecnica">Rev. técn.</label>
             <select id="revTecnica" name="revTecnica" class="form-select mb-3">
               
-              <option value="Si">Si</option>
-              <option value="No">No</option>
+              <option value="">{{$ficha->revTecnica}}</option>
+             
             </select>
           </div>
           <div class="col col-md-3 form-group">
             <label class="control-label" for="segVehiculo">Seg. vehic.</label>
             <select id="segVehiculo" name="segVehiculo" class="form-select mb-3">
              
-              <option value="Si">Si</option>
-              <option value="No">No</option>
+              <option value="">{{$ficha->segVehiculo}}</option>
+             
             </select>
           </div>
             
@@ -161,7 +156,7 @@ h6 {
           <div class="row" >  
             <div class="col col-md-3 form-group">
                   <div class="form-select mb-3">
-                  <input id="patentevehiculo" name="patentevehiculo" title="Patente del vehículo" type="text" class="mi-input form-control rounded custom" placeholder="Patente vehic." value={{old('patentevehiculo')}}>
+                  <input id="patentevehiculo" name="patentevehiculo" title="Patente del vehículo" type="text" class="mi-input form-control rounded custom" placeholder="Patente vehic." value={{$ficha->patentevehiculo}}>
                   @error('patentevehiculo')
                   <div class="alert alert-danger">{{ $message }}</div>
                   @enderror
@@ -171,7 +166,7 @@ h6 {
             </div>
             <div class="col col-md-3 form-group">
               <div class="form-select mb-3">
-                <input id="patenteacoplado" name="patenteacoplado" title="Patente del semi ó coplado" type="text" class="mi-input form-control rounded custom" placeholder="Patente chasis" value={{old('patenteacoplado')}}>
+                <input id="patenteacoplado" name="patenteacoplado" title="Patente del semi ó coplado" type="text" class="mi-input form-control rounded custom" placeholder="Patente chasis" value={{$ficha->patenteacoplado}}>
                 @error('patenteacoplado')
                   <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -192,39 +187,36 @@ h6 {
             </div>  
     <div class="row" >
           <div class="col col-md-3 form-group">
-            <label class="control-label" for="tipoIngreso">Ingreso</label> 
+            <label class="control-label" for="tipoIngreso">{{$ficha->tipoIngreso}}</label> 
             <select id="tipoIngreso" name="tipoIngreso"  class="form-select mb-3" >
               
-              <option value="Visita">Visita</option>
-              <option value="Proveedor">Proveedor</option>
+              <option value="">{{$ficha->tipoIngreso}}</option>
+             
             </select>
           </div>
 
           <div class="col col-md-3 form-group">
-            <label class="control-label" for="Seguro Per.">Seguro personal</label> 
-            <select id="segPersonal" name="Seguro personal" class="form-select mb-3">
+            <label class="control-label" for="segPersonal">Seg. personal</label> 
+            <select id="segPersonal" name="segPersonal" class="form-select mb-3">
              
-              <option value="Si">Si</option>
-              <option value="No">No</option>
+              <option value="">{{$ficha->segPersonal}}</option>
+             
             </select>
           </div>
 
           <div class="col col-md-3 form-group">
             <label class="control-label" for="materialSiNo">Materiales</label> 
             <select id="materialSiNo" name="materialSiNo" class="form-select mb-3" >
-              <option value="No">No</option>
-              <option value="Si">Si</option>
+              <option value="">{{$ficha->materialSiNo}}</option>
+              
             
             </select>
           </div>
           <div class="col col-md-3 form-group">
             <label class="control-label" for="visitasector">Sector</label> 
             <select id="visitasector" name="visitasector" class="form-select mb-3">
-              <option value="Administ.">Administración</option>
-              <option value="Of. téncnica">Of. técnica</option>
-              <option value="Of. pesonal">Of. personal</option>
-              <option value="Dep. azúcar">Dep. azúcar</option>
-              <option value="Dep. materiales">Dep. materiales</option>
+              <option value="">{{$ficha->visitasector}}</option>
+              
             </select>
           </div>
       </div> {{-- row 2 --}}
@@ -232,16 +224,16 @@ h6 {
       <div class="row" >
         <div class="col col-md-12"> 
           <input type="hidden" name="ingreso" value="En planta" readonly >
-          <input id="provieneDe" name="provieneDe" type="text" class="my-input form-control rounded custom" placeholder="¿De que empresa proviene?" value={{old('provieneDe')}}>
+          <input id="provieneDe" name="provieneDe" type="text" class="my-input form-control rounded custom" placeholder="¿De que empresa proviene?" value="{{$ficha->provieneDe}}">
           @error('provieneDe')
           <div class="alert alert-danger">{{ $message }}</div>
           @enderror
         </div>
      </div>
 
-      <div class="row" >
+           <div class="row" >
               <div class="col col-md-12"> 
-                <input id="A_quien" name="A_quien" type="text" class="my-input form-control rounded custom" placeholder="¿A quien visita?" value={{old('A_quien')}}>
+                <input id="A_quien" name="A_quien" type="text" class="my-input form-control rounded custom" placeholder="¿A quien visita?" value="{{$ficha->contactoriogrande1}}">
                 @error('A_quien')
           <div class="alert alert-danger">{{ $message }}</div>
           @enderror
@@ -249,12 +241,12 @@ h6 {
        </div>
         <div class="row" >
               <div class="col col-md-12">
-                  <input id="TipoDeCarga" name="TipoDeCarga" type="text" class="my-input form-control rounded custom" placeholder="¿Que tipo de carga?">
+                  <input id="TipoDeCarga" name="TipoDeCarga" type="text" class="my-input form-control rounded custom" placeholder="¿Que tipo de carga?" value="{{$ficha->TipoDeCarga}}">
               </div>
        </div>
        <div class="row" >
             <div class="col col-md-12">
-                <input id="cargaPara" name="cargaPara" type="text" class="my-input form-control rounded custom" placeholder="¿Para quién es la carga?">
+                <input id="cargaPara" name="cargaPara" type="text" class="my-input form-control rounded custom" placeholder="¿Para quién es la carga?" value="{{$ficha->cargaPara}}">
             </div>
        </div>
        
@@ -262,20 +254,20 @@ h6 {
           <div class="row  ">
                   
                   
-                  <label class="container1">Casco
-                    <input type="checkbox" name="casco" id="casco" value="1">
+                  <label class="container1">Dispone EPP
+                    <input type="checkbox" name="disponeepp" id="disponeepp" value="{{$ficha->disponeepp}}">
                   </label>
                   
-                  <label class="container1">Lentes
+                  {{-- <label class="container1">Lentes
                     <input type="checkbox"name="lentes" id="lentes" value="1">
                   </label>
 
                   <label class="container1">Botines
                     <input type="checkbox"  name="botines" id="botines" value="1">
-                  </label>
+                  </label> --}}
 
                   <label class="container1">Se otorga EPP
-                    <input type="checkbox" checked="checked" name="epp" id="epp" value="1">
+                    <input type="checkbox"  name="entregaepp" id="entregaepp" value="{{$ficha->entregaepp}}">
                   </label>
                 
             </div>
@@ -289,8 +281,8 @@ h6 {
     
               <div class="row" >
                 <div class="col col-md-12">
-                    <input id="nombrevigilantein" name="nombrevigilantein" type="text" class="my-input form-control rounded custom" placeholder="Nombre y apellido del vigilador" value={{old('nombrevigilantein')}}>
-                    @error('nombrevigilantein')
+                    <input id="nombrevigilantein" name="nombrevigilantein" type="text" class="my-input form-control rounded custom" placeholder="Nombre y apellido del vigilador" value="{{$ficha->nombrevigilantein}}">
+                    @error('nombrevigilanteIn')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                   </div>
@@ -310,13 +302,6 @@ h6 {
 </section>
 @stop
 
-
 @section('js')
-<script>
-    var select = document.getElementById("uniTiempoSelect");
-    select.addEventListener("change", function() {
-      select.blur(); // desenfoca el select
-      document.getElementById("descripcion").focus(); // enfoca otro elemento
-    });
-  </script>
+    <script> console.log('Hi!'); </script>
 @stop

@@ -96,9 +96,13 @@ class PersonaController extends Controller
      * @param  \App\Models\Persona  $persona
      * @return \Illuminate\Http\Response
      */
-    public function show(Persona $persona)
+    public function show($id)
     {   
-        return view('personas.view');
+        //dd ($id);
+        $persona=Persona::find($id);
+        $ficha=Ficha::find($persona->ficha_id);
+        //dd ($ficha);
+        return view('personas.show', compact('persona', 'ficha'));
     }
 
     /**
