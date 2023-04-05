@@ -302,7 +302,7 @@ h6 {
     
      <div class="form-group d-flex justify-content-center">
       {{-- Boton no visible --}}
-      <button id="enviar" form="nuevaFicha" form="nuevoMatrial" class="btn btn-info  boton" type="submit" >Guardar y continuar</button> 
+      <button id="enviar" form="nuevaFicha"  class="btn btn-info  boton" type="submit" >Guardar y continuar</button> 
      </div>
   </form>
   

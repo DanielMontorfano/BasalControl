@@ -103,14 +103,14 @@ h6 {
 @stop
 
 @section('content_header')
-    <h6>Permiso de ingreso y egreso IRG S.A.</h6>
+    <h6>{{$persona->nyapellido}}</h6>
 @stop
 
 @section('content')
 <section style="padding-bottom:60px; ">
 <div class="container ">
 
-  <form id="nuevaFicha"  action="{{route('fichas.store')}}" method="POST"  >
+  <form id="nuevaFicha"  action="" method=""  >
     @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
     <div class="card  " >
       <div class="card-body" align='center'>
@@ -156,7 +156,8 @@ h6 {
           <div class="row" >  
             <div class="col col-md-3 form-group">
                   <div class="form-select mb-3">
-                  <input id="patentevehiculo" name="patentevehiculo" title="Patente del vehículo" type="text" class="mi-input form-control rounded custom" placeholder="Patente vehic." value={{$ficha->patentevehiculo}}>
+                    <label class="control-label" for="patentevehiculo">Chasis</label>  
+                  <input id="patentevehiculo" name="patentevehiculo" title="Patente del vehículo" type="text" class="mi-input form-control rounded custom"  value={{$ficha->patentevehiculo}} readonly>
                   @error('patentevehiculo')
                   <div class="alert alert-danger">{{ $message }}</div>
                   @enderror
@@ -166,7 +167,8 @@ h6 {
             </div>
             <div class="col col-md-3 form-group">
               <div class="form-select mb-3">
-                <input id="patenteacoplado" name="patenteacoplado" title="Patente del semi ó coplado" type="text" class="mi-input form-control rounded custom" placeholder="Patente chasis" value={{$ficha->patenteacoplado}}>
+                <label class="control-label" for="patenteacoplado">Acoplado</label>
+                <input id="patenteacoplado" name="patenteacoplado" title="Patente del semi ó coplado" type="text" class="mi-input form-control rounded custom"  readonly value={{$ficha->patenteacoplado}} >
                 @error('patenteacoplado')
                   <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -224,7 +226,7 @@ h6 {
       <div class="row" >
         <div class="col col-md-12"> 
           <input type="hidden" name="ingreso" value="En planta" readonly >
-          <input id="provieneDe" name="provieneDe" type="text" class="my-input form-control rounded custom" placeholder="¿De que empresa proviene?" value="{{$ficha->provieneDe}}">
+          <input id="provieneDe" name="provieneDe" type="text" class="my-input form-control rounded custom" placeholder="¿De que empresa proviene?" value="{{$ficha->provieneDe}}" readonly>
           @error('provieneDe')
           <div class="alert alert-danger">{{ $message }}</div>
           @enderror
@@ -233,7 +235,7 @@ h6 {
 
            <div class="row" >
               <div class="col col-md-12"> 
-                <input id="A_quien" name="A_quien" type="text" class="my-input form-control rounded custom" placeholder="¿A quien visita?" value="{{$ficha->contactoriogrande1}}">
+                <input id="A_quien" name="A_quien" type="text" class="my-input form-control rounded custom" placeholder="¿A quien visita?" value="{{$ficha->contactoriogrande1}}" readonly>
                 @error('A_quien')
           <div class="alert alert-danger">{{ $message }}</div>
           @enderror
@@ -241,12 +243,12 @@ h6 {
        </div>
         <div class="row" >
               <div class="col col-md-12">
-                  <input id="TipoDeCarga" name="TipoDeCarga" type="text" class="my-input form-control rounded custom" placeholder="¿Que tipo de carga?" value="{{$ficha->TipoDeCarga}}">
+                  <input id="TipoDeCarga" name="TipoDeCarga" type="text" class="my-input form-control rounded custom" placeholder="¿Que tipo de carga?" value="{{$ficha->TipoDeCarga}}" readonly>
               </div>
        </div>
        <div class="row" >
             <div class="col col-md-12">
-                <input id="cargaPara" name="cargaPara" type="text" class="my-input form-control rounded custom" placeholder="¿Para quién es la carga?" value="{{$ficha->cargaPara}}">
+                <input id="cargaPara" name="cargaPara" type="text" class="my-input form-control rounded custom" placeholder="¿Para quién es la carga?" value="{{$ficha->cargaPara}}" readonly>
             </div>
        </div>
        
@@ -255,7 +257,7 @@ h6 {
                   
                   
                   <label class="container1">Dispone EPP
-                    <input type="checkbox" name="disponeepp" id="disponeepp" value="{{$ficha->disponeepp}}">
+                    <input type="checkbox" name="disponeepp" id="disponeepp" value="{{$ficha->disponeepp}}" readonly>
                   </label>
                   
                   {{-- <label class="container1">Lentes
@@ -267,7 +269,7 @@ h6 {
                   </label> --}}
 
                   <label class="container1">Se otorga EPP
-                    <input type="checkbox"  name="entregaepp" id="entregaepp" value="{{$ficha->entregaepp}}">
+                    <input type="checkbox"  name="entregaepp" id="entregaepp" value="{{$ficha->entregaepp}}" readonly>
                   </label>
                 
             </div>
@@ -281,7 +283,7 @@ h6 {
     
               <div class="row" >
                 <div class="col col-md-12">
-                    <input id="nombrevigilantein" name="nombrevigilantein" type="text" class="my-input form-control rounded custom" placeholder="Nombre y apellido del vigilador" value="{{$ficha->nombrevigilantein}}">
+                    <input id="nombrevigilantein" name="nombrevigilantein" type="text" class="my-input form-control rounded custom" placeholder="Nombre y apellido del vigilador" value="{{$ficha->nombrevigilantein}}" readonly>
                     @error('nombrevigilanteIn')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -294,10 +296,11 @@ h6 {
     
      <div class="form-group d-flex justify-content-center">
       {{-- Boton no visible --}}
-      <button id="enviar" form="nuevaFicha" form="nuevoMatrial" class="btn btn-info  boton" type="submit" >Guardar y continuar</button> 
+      <a href="{{ url()->previous() }}" class="btn btn-info ">Volver</a>
+      
      </div>
-  </form>
-  
+
+  </form> 
 </div> {{-- Container --}}
 </section>
 @stop

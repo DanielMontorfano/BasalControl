@@ -304,7 +304,12 @@ return [
              'icon'        => 'fas fa-fw fa-home',
             'topnav' => true,
         ],
-
+         
+        [
+            'text'         => 'Listado',
+             'route'       => 'personas.index',
+            'topnav' => true,
+        ],
         [
             'text'         => 'Nuevo Ingreso',
              'route'       => 'fichas.create',

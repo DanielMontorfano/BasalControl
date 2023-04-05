@@ -68,7 +68,14 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   }
 
-  
+  a {
+    color: rgba(3, 8, 14, 0.658);
+    font-size: 20px;
+  }
+  a:hover {
+    color: rgba(234, 234, 193, 0.658);
+    text-decoration: underline;
+  }
 </style>
 {{-- https://datatables.net/ **IMPORTANTE PLUG IN PARA LAS TABLAS --}}
 {{-- Para que sea responsive se agraga la tercer libreria --}}
@@ -103,7 +110,7 @@
       @foreach ($personas as $persona)
       <tr STYLE="text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">
         
-        <td STYLE="font-weight:bold; text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; "> <a href="{{route('personas.show', $persona->id)}}"> {{$persona->nyapellido}} </a></td>
+        <td> <a href="{{route('personas.show', $persona->id)}}" style=" text-decoration: none;" title="Ver datos de esta persona"> {{$persona->nyapellido}} </a></td>
         <td>{{$persona->created_at}}</td>
         <td>{{$persona->tipoIngreso}}</td>
         <td>{{$persona->provieneDe}}</td>

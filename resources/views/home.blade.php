@@ -31,7 +31,7 @@
   /* Estilos para el elemento <p> */
   p {
     font-size: 18px; /* Tamaño de letra */
-    color: #eaede9; /* Color de texto */
+    color: #e6e398; /* Color de texto */
     font-family: Arial, sans-serif; /* Fuente */
     margin: 20px; /* Márgenes */
   }
@@ -41,7 +41,7 @@
 @stop
 
 @section('content_header')
-<h1 align='center'STYLE="text-align:center; font-size: 60px; ">Permiso de ingreso</h1>
+<h1 align='center'STYLE="text-align:center; font-size: 50px; ">Actividad en portería IRG</h1>
 @stop
 
 @section('content')
@@ -52,7 +52,7 @@
               {{-- Columna 1 --}}
               <div class="card  " >
                 <div class="card-body" align='center'>
-                    <img src={{asset('iconos\list1.png')}}  class="card-img-top" alt="...">
+                    <img src={{asset('iconos\checkList2.png')}}  class="card-img-top" alt="...">
                     <p>Estado actual</p>
                     <a href="{{route('personas.index')}}" class="btn stretched-link"></a> 
                     {{-- <a href="#" class="btn stretched-link"></a> --}}
@@ -64,7 +64,7 @@
               {{-- Columna 1 --}}
               <div class="card  " >
                 <div class="card-body" align='center'>
-                  <img src={{asset('iconos\permiso5.png')}}  class="card-img-top" alt="...">
+                  <img src={{asset('iconos\tarjeta1.png')}}  class="card-img-top" alt="...">
                    
                     <p>Nuevo ingreso</p>
                     <a href="{{route('fichas.create')}}" class="btn stretched-link"></a> 
@@ -73,6 +73,30 @@
                 </div>
             </div>
 
+            <div class="col col-md-3">
+              {{-- Columna 1 --}}
+              <div class="card  " >
+                <div class="card-body" align='center'>
+                  <img src={{asset('iconos\cascoAmarillo.png')}}  class="card-img-top" alt="...">
+                   
+                    <p>Salida de personal</p>
+                    <a href="#" class="btn stretched-link"></a> 
+                    {{-- <a href="#" class="btn stretched-link"></a> --}}
+                  </div>
+                </div>
+            </div>
+            <div class="col col-md-3">
+              {{-- Columna 1 --}}
+              <div class="card  " >
+                <div class="card-body" align='center'>
+                  <img src={{asset('iconos\cascoBlanco1.png')}}  class="card-img-top" alt="...">
+                   
+                    <p>Jefes</p>
+                    <a href="#" class="btn stretched-link"></a> 
+                    {{-- <a href="#" class="btn stretched-link"></a> --}}
+                  </div>
+                </div>
+            </div>
             
 
      </div>
