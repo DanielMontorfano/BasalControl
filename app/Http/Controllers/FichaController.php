@@ -46,7 +46,7 @@ class FichaController extends Controller
             'patenteacoplado' => ['nullable', 'regex:/^[A-Z]{2}\d{3}[A-Z]{2}$/'],
             'provieneDe' => 'required',
             'A_quien' => 'required',
-            'nombrevigilanteIn' => 'required',
+            'nombrevigilantein' => 'required',
              
              
         ], [
@@ -54,7 +54,7 @@ class FichaController extends Controller
             'patenteacoplado.regex' => 'Esta patente no es válida.',
             'provieneDe.required' => 'Es necesario saber de donde proviene.',
             'A_quien.required' => 'Es necesario saber el contacto en el ingenio.',
-            'nombrevigilanteIn.required' => 'El nombre vigilador es obligatorio.',
+            'nombrevigilantein.required' => 'El nombre vigilador es obligatorio.',
             
         ]);
         
