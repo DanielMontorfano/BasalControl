@@ -15,7 +15,8 @@ class Persona extends Model
 
     public function personasMaterials()
     {
-        return $this->belongsToMany('App\Models\Material', 'persona_materials');
+        return $this->belongsToMany('App\Models\Material', 'persona_materials', 'persona_id', 'material_id'); //Personalizo nombre la tabla  pivot  y campos por las dudas 
+       
         
     }
      

@@ -101,8 +101,10 @@ class PersonaController extends Controller
         //dd ($id);
         $persona=Persona::find($id);
         $ficha=Ficha::find($persona->ficha_id);
-        //dd ($ficha);
-        return view('personas.show', compact('persona', 'ficha'));
+        $materiales=Persona::find($id)->personasMaterials;
+        //dd ($material);
+        //return $material;
+        return view('personas.show', compact('persona', 'ficha', 'materiales'));
     }
 
     /**

@@ -187,72 +187,7 @@ h6 {
             <div class="row  ">
               <h2>Datos generales</h2> 
             </div>  
-    <div class="row" >
-          <div class="col col-md-3 form-group">
-            <label class="control-label" for="tipoIngreso">{{$ficha->tipoIngreso}}</label> 
-            <select id="tipoIngreso" name="tipoIngreso"  class="form-select mb-3" >
-              
-              <option value="">{{$ficha->tipoIngreso}}</option>
-             
-            </select>
-          </div>
-
-          <div class="col col-md-3 form-group">
-            <label class="control-label" for="segPersonal">Seg. personal</label> 
-            <select id="segPersonal" name="segPersonal" class="form-select mb-3">
-             
-              <option value="">{{$ficha->segPersonal}}</option>
-             
-            </select>
-          </div>
-
-          <div class="col col-md-3 form-group">
-            <label class="control-label" for="materialSiNo">Materiales</label> 
-            <select id="materialSiNo" name="materialSiNo" class="form-select mb-3" >
-              <option value="">{{$ficha->materialSiNo}}</option>
-              
-            
-            </select>
-          </div>
-          <div class="col col-md-3 form-group">
-            <label class="control-label" for="visitasector">Sector</label> 
-            <select id="visitasector" name="visitasector" class="form-select mb-3">
-              <option value="">{{$ficha->visitasector}}</option>
-              
-            </select>
-          </div>
-      </div> {{-- row 2 --}}
-
-      <div class="row" >
-        <div class="col col-md-12"> 
-          <input type="hidden" name="ingreso" value="En planta" readonly >
-          <input id="provieneDe" name="provieneDe" type="text" class="my-input form-control rounded custom" placeholder="¿De que empresa proviene?" value="{{$ficha->provieneDe}}" readonly>
-          @error('provieneDe')
-          <div class="alert alert-danger">{{ $message }}</div>
-          @enderror
-        </div>
-     </div>
-
-           <div class="row" >
-              <div class="col col-md-12"> 
-                <input id="A_quien" name="A_quien" type="text" class="my-input form-control rounded custom" placeholder="¿A quien visita?" value="{{$ficha->contactoriogrande1}}" readonly>
-                @error('A_quien')
-          <div class="alert alert-danger">{{ $message }}</div>
-          @enderror
-              </div>
-       </div>
-        <div class="row" >
-              <div class="col col-md-12">
-                  <input id="TipoDeCarga" name="TipoDeCarga" type="text" class="my-input form-control rounded custom" placeholder="¿Que tipo de carga?" value="{{$ficha->TipoDeCarga}}" readonly>
-              </div>
-       </div>
-       <div class="row" >
-            <div class="col col-md-12">
-                <input id="cargaPara" name="cargaPara" type="text" class="my-input form-control rounded custom" placeholder="¿Para quién es la carga?" value="{{$ficha->cargaPara}}" readonly>
-            </div>
-       </div>
-       
-      
+    
           <div class="row  ">
                   
                   
@@ -274,25 +209,103 @@ h6 {
                 
             </div>
       
-       
+            
+            <div class="row  ">
+              <table id="table" class="table" style="color: rgb(209, 226, 208)">
+                  <tr>
+                    <td> <strong>Tipo de ingreso: </strong>{{$ficha->tipoIngreso}}</td>
+                  </tr>
+                  <tr>
+                      <td><strong>Seguro personal: </strong> {{$ficha->segPersonal}} <strong></td>
+                  </tr>
+                  <tr>
+                      <td><strong>Ingresó materiales:</strong> {{$ficha->materialSiNo}}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Se dirigío al sector de: </strong> {{$ficha->visitasector}}</td>
+                  </tr> 
+                  <tr>
+                    <td><strong>Lo recibió:</strong> {{$ficha->contactoriogrande1}}</td>
+                 </tr>
+
+                  <tr>
+                    <td><strong> Provenía de la empresa: </strong> {{$ficha->provieneDe}}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>La carga que traía era: </strong> {{$ficha->TipoDeCarga}}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>El destinatario de la carga fué: </strong> {{$ficha->cargaPara}}</td>
+                  </tr>
+             </table>
+            </div> 
+            
+
+
+
+
+
+
+
+
+
+
     </div> {{-- card body --}}
     
     </div> {{-- card --}}
+
     <div class="card  " >
       <div class="card-body" align='center'>
-    
+        <div class="row  ">
+          <h5>Materiales retirados por {{$persona->nyapellido}} </h5> 
+        </div> 
               <div class="row" >
                 <div class="col col-md-12">
-                    <input id="nombrevigilantein" name="nombrevigilantein" type="text" class="my-input form-control rounded custom" placeholder="Nombre y apellido del vigilador" value="{{$ficha->nombrevigilantein}}" readonly>
-                    @error('nombrevigilanteIn')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
+                  <table id="table" class="table" style="color: rgb(209, 226, 208)">
+                    <thead>
+                        <tr align="center">
+                            <th  width=80%>Descripción</th>
+                            <th width=10%>Cantidad</th>
+                            <th width=10%>Unidad</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                      @foreach($materiales as $material)
+                        <tr align="center">
+                            <td class="text-left" >{{$material->descripcion}}</td>                         
+                            <td>{{$material->cantidad}}</td>
+                            <td>{{$material->unidad}}</td>
+                            
+                        </tr>
+                      @endforeach
+                    </tbody>
+                </table>
+                  
                   </div>
             </div>
+            <div class="row  ">
+              <table id="table" class="table" style="color: rgb(209, 226, 208)">
+                  <tr>
+                    <td> <strong>Sección de donde vino: </strong>{{$ficha->seccionautoriza}}</td>
+                  </tr>
+                  <tr>
+                      <td><strong>Destino de los materiales:</strong>  {{$ficha->destino}} </td>
+                  </tr>
+                  <tr>
+                      <td><strong>Autorizó:</strong> {{$ficha->autorizasalida}}</td>
+                  </tr>
+                  <tr>
+                    <td><strong> Fecha y hora: </strong> {{$ficha->updated_at}}</td>
+                  </tr>
+                  <tr>
+                    <td><strong> El vigilador fué: </strong> {{$ficha->nombrevigilantein}}</td>
+                  </tr>
+             </table>
+            </div> 
       </div>
-      
-    </div>
-     
+   </div> {{-- card --}}
+    
     
      <div class="form-group d-flex justify-content-center">
       {{-- Boton no visible --}}
