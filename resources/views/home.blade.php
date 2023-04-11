@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-
+@section('title', 'Inicio')
 @section('css')
 <style>
     

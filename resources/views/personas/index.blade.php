@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Personas')
+@section('title', 'Listado')
 @section('css')
 
 <style>
@@ -122,7 +122,7 @@
               {{-- @csrf
               @method('put')  --}}
               <input type="hidden" name="salidaTipo" value="salida1" readonly >
-              <input  hidden type="text" name="ingreso" value="salió" id="">
+              <input  hidden type="text" name="ingreso" value="Salió" id="">
               <input  hidden type="text" name="ficha_id" value="{{$persona->ficha_id}}" id="">
               <button title="Sale caminando con materiales" type="submit" class="btn btn-gradient1 mr-1">
                 <img src="{{ asset('iconos/conCajaPng.png') }}" alt="con Caja" width="32" height="32" ;>   
@@ -133,7 +133,7 @@
               {{-- @csrf
               @method('put')  --}}
               <input type="hidden" name="salidaTipo" value="salida2" readonly >
-              <input hidden type="text" name="ingreso" value="salió" id="">
+              <input hidden type="text" name="ingreso" value="Salió" id="">
               <input  hidden type="text" name="ficha_id" value="{{$persona->ficha_id}}" id="">
               <button title="Sale caminando sin materiales"type="submit" class="btn btn-gradient1 mr-1">
                 <img src="{{ asset('iconos/sinCajaPng.png') }}" alt="sin Caja" width="32" height="32" ;> 
@@ -145,18 +145,18 @@
               {{-- @csrf
               @method('put')  --}}
               <input type="hidden" name="salidaTipo" value="salida3" readonly >
-              <input hidden type="text" name="ingreso" value="salió" id="">
+              <input hidden type="text" name="ingreso" value="Salió" id="">
               <input  hidden type="text" name="ficha_id" value="{{$persona->ficha_id}}" id="">
               <button title="Sale vehículo con materiales" type="submit" class="btn btn-gradient1 mr-1 ">
                 <img src="{{ asset('iconos/CamionLindo1.png') }}" alt="Icono lindo 1" width="32" height="32" ;>
               
               </button>
             </form>
-            <form action="{{route('personas.update', $persona->id)}}" method="GET">
+            <form action="{{route('personas.salida4', $persona->id)}}" method="GET">
               {{-- @csrf
               @method('put')  --}}
               <input type="hidden" name="salidaTipo" value="salida4" readonly >
-              <input hidden type="text" name="ingreso" value="salió" id="">
+              <input hidden type="text" name="ingreso" value="Salió" id="">
               <input  hidden type="text" name="ficha_id" value="{{$persona->ficha_id}}" id="">
               <button title="Sale vehículo sin materiales" type="submit" class="btn btn-gradient1 mr-1 ">
                 <img src="{{ asset('iconos/CamionLindo2.png') }}" alt="Icono lindo 1" width="32" height="32" ;>
@@ -167,7 +167,7 @@
           {{-- <a class="bi bi-eye" href="{{route('personas.show', $persona->id)}}"></a> --}}
         </td>
         @endif
-        @if($persona->ingreso =='salió') {{-- Para saber si es repuesto o no --}}
+        @if($persona->ingreso =='Salió') {{-- Para saber si es repuesto o no --}}
         <td><button class="btn btn-gradient">{{$persona->created_at}} &nbsp;/&nbsp; {{$persona->updated_at}}</button></td> 
         @endif
 

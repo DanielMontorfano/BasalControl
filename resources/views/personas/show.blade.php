@@ -112,74 +112,7 @@ h6 {
 
   <form id="nuevaFicha"  action="" method=""  >
     @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
-    <div class="card  " >
-      <div class="card-body" align='center'>
-            <div class="row  ">
-              <h2>Datos de vehiculo</h2> 
-            </div>  
-    <div class="row" >
-      <div class="col col-md-3 form-group">
-            <label class="control-label" for="tipoVehiculo">Vehículo</label> 
-            <select id="tipoVehiculo" name="tipoVehiculo" class="form-select mb-3">
-             
-              <option value="">{{$ficha->tipoVehiculo}}</option>
-              
-            </select>
-          </div>
-          <div class="col col-md-3 form-group">
-            <label class="control-label" for="estadoVehiculo">Estado</label> 
-            <select id="estadoVehiculo" name="estadoVehiculo" class="form-select mb-3">
-              
-              <option value="">{{$ficha->estadoVehiculo}}</option>
-             
-            </select>
-          </div>
-          <div class="col col-md-3 form-group">
-            <label class="control-label" for="revTecnica">Rev. técn.</label>
-            <select id="revTecnica" name="revTecnica" class="form-select mb-3">
-              
-              <option value="">{{$ficha->revTecnica}}</option>
-             
-            </select>
-          </div>
-          <div class="col col-md-3 form-group">
-            <label class="control-label" for="segVehiculo">Seg. vehic.</label>
-            <select id="segVehiculo" name="segVehiculo" class="form-select mb-3">
-             
-              <option value="">{{$ficha->segVehiculo}}</option>
-             
-            </select>
-          </div>
-            
-          </div> {{-- 1ra fila del card --}}
-           
-          <div class="row" >  
-            <div class="col col-md-3 form-group">
-                  <div class="form-select mb-3">
-                    <label class="control-label" for="patentevehiculo">Chasis</label>  
-                  <input id="patentevehiculo" name="patentevehiculo" title="Patente del vehículo" type="text" class="mi-input form-control rounded custom"  value={{$ficha->patentevehiculo}} readonly>
-                  @error('patentevehiculo')
-                  <div class="alert alert-danger">{{ $message }}</div>
-                  @enderror
-                
-                
-                </div>
-            </div>
-            <div class="col col-md-3 form-group">
-              <div class="form-select mb-3">
-                <label class="control-label" for="patenteacoplado">Acoplado</label>
-                <input id="patenteacoplado" name="patenteacoplado" title="Patente del semi ó coplado" type="text" class="mi-input form-control rounded custom"  readonly value={{$ficha->patenteacoplado}} >
-                @error('patenteacoplado')
-                  <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-              </div>
-            </div> 
-          </div> {{-- 1ra fila del card --}}
-    </div> {{-- card body --}}
-    </div> {{-- card --}}
-
-
-
+   
     {{--Segunda fila ******************************************** --}}
     
     <div class="card  " >
@@ -306,7 +239,54 @@ h6 {
       </div>
    </div> {{-- card --}}
     
-    
+   <div class="card  " >  {{-- Datos de vehículo --}}
+    <div class="card-body" align='center'>
+          <div class="row  ">
+            <h2>Datos del vehículo</h2> 
+          </div>  
+  
+        <div class="row  ">
+          <table id="table" class="table" style="color: rgb(209, 226, 208)">  
+            <tr>
+              <td> <strong>Tipo de vehiculo: </strong>{{$ficha->tipoVehiculo}}</td>
+            </tr>
+            <tr>
+              <td> <strong>Estado del vehículo: </strong>{{$ficha->estadoVehiculo}}</td>
+            </tr>
+            <tr>
+              <td> <strong>Revisión técnica: </strong>{{$ficha->revTecnica}}</td>
+            </tr>
+            <tr>
+              <td> <strong>Tenía seguro: </strong>{{$ficha->segVehiculo}}</td>
+            </tr>
+            <tr>
+              <td> <strong>Patente del vehículo: </strong>{{$ficha->patentevehiculo}}</td>
+            </tr>
+            <tr>
+              <td> <strong>Patente del acoplado: </strong>{{$ficha->patenteacoplado}}</td>
+            </tr>
+
+
+
+          </table>        
+        </div>
+    </div>
+  </div> {{-- card de vehículo --}} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
      <div class="form-group d-flex justify-content-center">
       {{-- Boton no visible --}}
       <a href="{{ url()->previous() }}" class="btn btn-info ">Volver</a>

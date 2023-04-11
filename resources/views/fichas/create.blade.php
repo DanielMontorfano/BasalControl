@@ -99,6 +99,10 @@ h6 {
     -webkit-text-fill-color: transparent;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   }
+
+  
+
+
 </style>
 @stop
 
@@ -109,19 +113,30 @@ h6 {
 @section('content')
 <section style="padding-bottom:60px; ">
 <div class="container ">
-
+   
   <form id="nuevaFicha"  action="{{route('fichas.store')}}" method="POST"  >
     @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
-    <div class="card  " >
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="toggle-card" name="sinVehiculo">
+      <label class="form-check-label" for="toggle-card">
+        Sin vehiculo
+      </label>
+    </div>
+    
+    
+        
+
+   
+    <div class="card my-3" id="my-card">
       <div class="card-body" align='center'>
             <div class="row  ">
               <h2>Datos de vehiculo</h2> 
             </div>  
-    <div class="row" >
-      <div class="col col-md-3 form-group">
+         <div class="row" >
+           <div class="col col-md-3 form-group">
             <label class="control-label" for="tipoVehiculo">Vehículo</label> 
             <select id="tipoVehiculo" name="tipoVehiculo" cclass="form-select mb-3">
-             
               <option value="Auto">Auto</option>
               <option value="Pick-Up">Pick-Up</option>
               <option value="Camión">Camión</option>
@@ -232,7 +247,7 @@ h6 {
       <div class="row" >
         <div class="col col-md-12"> 
           <input type="hidden" name="ingreso" value="En planta" readonly >
-          <input id="provieneDe" name="provieneDe" type="text" class="my-input form-control rounded custom" placeholder="¿De que empresa proviene?" value={{old('provieneDe')}}>
+          <input id="provieneDe" name="provieneDe" type="text" class="my-input form-control rounded custom" placeholder="¿De que empresa proviene?" value="{{old('provieneDe')}}">
           @error('provieneDe')
           <div class="alert alert-danger">{{ $message }}</div>
           @enderror
@@ -241,7 +256,7 @@ h6 {
 
       <div class="row" >
               <div class="col col-md-12"> 
-                <input id="A_quien" name="A_quien" type="text" class="my-input form-control rounded custom" placeholder="¿A quien visita?" value={{old('A_quien')}}>
+                <input id="A_quien" name="A_quien" type="text" class="my-input form-control rounded custom" placeholder="¿A quien visita?" value="{{old('A_quien')}}">
                 @error('A_quien')
           <div class="alert alert-danger">{{ $message }}</div>
           @enderror
@@ -313,10 +328,23 @@ h6 {
 
 @section('js')
 <script>
-    var select = document.getElementById("uniTiempoSelect");
-    select.addEventListener("change", function() {
-      select.blur(); // desenfoca el select
-      document.getElementById("descripcion").focus(); // enfoca otro elemento
-    });
-  </script>
+ 
+   // Selecciona el checkbox y el card
+const checkbox = document.getElementById("toggle-card");
+const card = document.getElementById("my-card");
+
+// Escucha los cambios en el checkbox
+checkbox.addEventListener("change", () => {
+  if (checkbox.checked) {
+    // Oculta el card si el checkbox está marcado
+    card.classList.add("d-none");
+  } else {
+    // Muestra el card si el checkbox no está marcado
+    card.classList.remove("d-none");
+  }
+});
+
+
+</script>
+
 @stop

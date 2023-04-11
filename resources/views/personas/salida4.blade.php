@@ -30,8 +30,9 @@
 
 @section('content')
 <div class="container">
-    <form id="nuevoMatrial" action="{{route('materials.store')}}" method="POST">
+    <form id="nuevoMatrial" action="{{route('personas.conSalida4')}}" method="POST">
         @csrf
+        @method('put') 
         <input type="hidden" name="persona" value={{$persona->id}} readonly >
         <input type="hidden" name="ficha_id" value={{$persona->ficha_id}} readonly >
         <input type="hidden" name="salidaTipo" value="retorno4" readonly >

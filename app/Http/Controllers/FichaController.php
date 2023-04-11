@@ -42,27 +42,29 @@ class FichaController extends Controller
         //dd ( $request->all());
         $ficha= new Ficha();
         $this->validate($request, [
-            'patentevehiculo' => ['nullable', 'regex:/^[A-Z]{3}\s\d{3}$|^[A-Z]{2}\d{3}[A-Z]{2}$/'],
-            'patenteacoplado' => ['nullable', 'regex:/^[A-Z]{2}\d{3}[A-Z]{2}$/'],
+            
             'provieneDe' => 'required',
             'A_quien' => 'required',
             'nombrevigilantein' => 'required',
-             
-             
-        ], [
-            'patentevehiculo.regex' => 'Esta patente no es válida.',
-            'patenteacoplado.regex' => 'Esta patente no es válida.',
+         ], [
             'provieneDe.required' => 'Es necesario saber de donde proviene.',
             'A_quien.required' => 'Es necesario saber el contacto en el ingenio.',
             'nombrevigilantein.required' => 'El nombre vigilador es obligatorio.',
-            
-        ]);
-        
-        
-        
-       // $ficha->persona_id=$request->persona_id;
-        $ficha->ingreso=$request->ingreso;
-       // $ficha->nomEmpresa=$request->nomEmpresa;
+         ]);
+     
+     //################## Solo si tiene vehiculo
+     if($request->missing('sinVehiculo')){ // ingresa si sinVehiculo no existe. (no fue tildado)
+            $this->validate($request, [
+                'patentevehiculo' => ['nullable', 'regex:/^[A-Z]{3}\d{3}$|^[A-Z]{2}\d{3}[A-Z]{2}$/'],
+                'patenteacoplado' => ['nullable', 'regex:/^[A-Z]{3}\d{3}$|^[A-Z]{2}\d{3}[A-Z]{2}$/'],
+                'patentevehiculo' => 'required',
+     
+            ], [
+                'patentevehiculo.regex' => 'Esta patente no es válida.',
+                'patenteacoplado.regex' => 'Esta patente no es válida.',
+                'patentevehiculo.required' => 'Se necesita ingresar la patente',
+            ]);
+      
         $ficha->tipoVehiculo=$request->tipoVehiculo;
         $ficha->estadoVehiculo=$request->estadoVehiculo;
         $ficha->revTecnica=$request->revTecnica;
@@ -70,6 +72,11 @@ class FichaController extends Controller
         $ficha->segPersonal=$request->segPersonal;
         $ficha->patentevehiculo=$request->patentevehiculo;
         $ficha->patenteacoplado=$request->patenteacoplado;
+        //dd ( $request->all());
+        } 
+    //################## Siempre 
+
+        $ficha->ingreso=$request->ingreso;
         $ficha->tipoIngreso=$request->tipoIngreso;
         $ficha->materialSiNo=$request->materialSiNo;
         $ficha->visitasector=$request->visitasector;

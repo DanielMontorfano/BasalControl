@@ -63,7 +63,22 @@ class PersonaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   //dd ( $request->all());
+    { // dd ( $request->all());
+        
+        $this->validate($request, [
+            
+            'nyapellido' => 'required',
+            'dni' => 'required',
+            
+         ], [
+            'nyapellido.required' => 'Es necesario este campo.',
+            'dni' => 'Es necesario saber el dni.',
+           
+         ]);
+
+
+
+
         $persona= new Persona(); 
         $persona->ficha_id=$request->nuevoId;
         $persona->nyapellido=$request->nyapellido;
@@ -127,32 +142,7 @@ class PersonaController extends Controller
      */
     public function update(Request $request, $id)
     {
-       //dd ( $request->all());
-       $persona= Persona::find($id);
-       $selector=$request->salidaTipo;
-       if($selector=="salida1"){ //salida1 reperesenta caminando con materiales, salida1 retorna a materiales.update, quien genera material y vincula a la persona
-
-       return view('personas.salida1', compact('persona',$persona->id, $persona->ficha_id));
-       }
-      
-       if($selector=="salida2"){ //salida1 reperesenta caminando con materiales
-       // return 'Salida2';
-        return view('personas.salida2', compact('persona',$persona->id, $persona->ficha_id));
-       }
-       
-       if($selector=="salida3"){ //salida1 reperesenta caminando con materiales
-        return view('personas.salida3', compact('persona',$persona->id, $persona->ficha_id));
-       }
-      
-       if($selector=="salida4"){ //salida1 reperesenta caminando con materiales
-        return view('personas.salida4', compact('persona',$persona->id, $persona->ficha_id));
-       }
-  
-       //********$persona->ingreso=$request->ingreso;
-       //********$persona->save();
-      // echo "estoy en update" . $ficha;
-       return redirect()->route('personas.index');
-        echo"estoy en personas update";
+       //
     }
     
     
@@ -216,7 +206,7 @@ class PersonaController extends Controller
         //$personaId = 5; // Reemplaza con el ID de la persona que quieras vincular los materiales
         $persona = Persona::find($personaId);
         
-        $persona->ingreso='salió'; //Es para indicar que la persona salió
+        $persona->ingreso='Salió'; //Es para indicar que la persona salió
         $persona -> save();
         //La siguiente linea guarda datos de vinculo en la tabla PersonaMaterial
         $persona->personasMaterials()->attach($materialesIds); //Funciona pero no guarda time_at y udated_at ver planProtoController
@@ -238,7 +228,7 @@ class PersonaController extends Controller
         $selector=$request->salidaTipo;
         if($selector=="retorno2"){ //proviene de salida2 reperesenta caminando con materiales
             $persona = Persona::find($personaId);
-            $persona->ingreso='salió'; //Es para indicar que la persona salió s/materiales caminando
+            $persona->ingreso='Salió'; //Es para indicar que la persona salió s/materiales caminando
             $persona -> save();
         return redirect()->route('personas.index');
 
@@ -305,7 +295,7 @@ class PersonaController extends Controller
         //$personaId = 5; // Reemplaza con el ID de la persona que quieras vincular los materiales
         $persona = Persona::find($personaId);
         
-        $persona->ingreso='salió'; //Es para indicar que la persona salió
+        $persona->ingreso='Salió'; //Es para indicar que la persona salió
         $persona -> save();
         //La siguiente linea guarda datos de vinculo en la tabla PersonaMaterial
         $persona->personasMaterials()->attach($materialesIds); //Funciona pero no guarda time_at y udated_at ver planProtoController
@@ -315,12 +305,29 @@ class PersonaController extends Controller
         $ficha->autorizasalida=$request->autorizasalida;
         $ficha->nombrevigilanteout=$request->nombrevigilanteout;
         /*IMPORTANTE: la unica dif. entre salida 1 y salida3 es la linea siguiente "SALE CON VEHICULO!!!!"*/
-        $ficha->ingreso='salió'; //Es para indicar que la persona con vehiculo salió  c/materiales y vehiculo
+        $ficha->ingreso='Salió'; //Es para indicar que la persona con vehiculo salió  c/materiales y vehiculo
         $ficha -> save();
         
         return redirect()->route('personas.index');
     }
     
+        public function conSalida4(Request $request){
+        // dd(request()->all());
+         // Validar los datos del formulario
+         $personaId=$request->persona;
+         $fichaId=$request->ficha_id;  //utilizado para retorno3
+         $selector=$request->salidaTipo;
+         if($selector=="retorno4"){ //proviene de salida2 reperesenta caminando con materiales
+             $persona = Persona::find($personaId);
+             $persona->ingreso='Salió'; //Es para indicar que la persona salió s/materiales caminando
+             $persona -> save();
+         return redirect()->route('personas.index');
+ 
+         } 
+     }
+ 
+
+
 
     /**
      * Remove the specified resource from storage.

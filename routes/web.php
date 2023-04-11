@@ -37,7 +37,11 @@ Route::get('salida3/{personaId}', function($personaId){  //Sale con vehiculo con
 })->name('personas.salida3');
 Route::put('conSalida3', [PersonaController::class,'conSalida3'])->name('personas.conSalida3');
 
-
+Route::get('salida4/{personaId}', function($personaId){  //Sale con vehiculo con materiales
+    $persona= Persona::find($personaId);
+    return view('personas.salida4', compact('persona',$persona->id, $persona->ficha_id));
+})->name('personas.salida4');
+Route::put('conSalida4', [PersonaController::class,'conSalida4'])->name('personas.conSalida4');
 
 
 
