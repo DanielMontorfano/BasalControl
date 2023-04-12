@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('ficha_id')->nullable();
             $table->string('nyapellido')->nullable();
             $table->string('dni')->nullable();
+            $table->string('rfid')->nullable();
             $table->string('ingreso')->nullable();
             $table->timestamps();
             $table->foreign('ficha_id')->references('id')->on('fichas')->onDelete('cascade');

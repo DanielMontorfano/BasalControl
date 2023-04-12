@@ -100,6 +100,7 @@
     <thead class="table-dark" >
         
         <td>Persona</td>
+        <td>RFID</td>
         <td>Ingresó</td> 
         <td>Tipo</td>
         <td>Empresa</td>
@@ -111,6 +112,7 @@
       <tr STYLE="text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">
         
         <td> <a href="{{route('personas.show', $persona->id)}}" style=" text-decoration: none;" title="Ver datos de esta persona"> {{$persona->nyapellido}} </a></td>
+        <td>{{$persona->rfid}}</td>
         <td>{{$persona->created_at}}</td>
         <td>{{$persona->tipoIngreso}}</td>
         <td>{{$persona->provieneDe}}</td>

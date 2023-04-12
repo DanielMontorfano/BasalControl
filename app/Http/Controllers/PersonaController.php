@@ -20,7 +20,7 @@ class PersonaController extends Controller
        // $personas = Persona::latest()->get();
         // $ultimosRepuestos = Repuesto::orderBy('created_at', 'desc')->take(5)->get();
         $personas = Persona::leftJoin('fichas', 'personas.ficha_id', '=', 'fichas.id')
-                   ->select('personas.id','personas.nyapellido','personas.created_at', 'personas.updated_at', 'personas.ficha_id', 'fichas.tipoIngreso', 'fichas.provieneDe', 'personas.ingreso')
+                   ->select('personas.id','personas.nyapellido', 'personas.rfid','personas.created_at', 'personas.updated_at', 'personas.ficha_id', 'fichas.tipoIngreso', 'fichas.provieneDe', 'personas.ingreso')
                    ->orderBy('personas.id', 'desc')
                    ->get();
        // return $personas;
@@ -69,11 +69,12 @@ class PersonaController extends Controller
             
             'nyapellido' => 'required',
             'dni' => 'required',
+            'rfid' => 'required',
             
          ], [
             'nyapellido.required' => 'Es necesario este campo.',
             'dni' => 'Es necesario saber el dni.',
-           
+            'rfid' => 'Es necesario asignar un RFID.',
          ]);
 
 
@@ -84,6 +85,7 @@ class PersonaController extends Controller
         $persona->nyapellido=$request->nyapellido;
         $persona->ingreso=$request->ingreso;
         $persona->dni=$request->dni;
+        $persona->rfid=$request->rfid;
         $persona->save();
         //$ficha=Ficha::find($nuevoId);
         //dd( $request->all());

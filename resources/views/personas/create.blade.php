@@ -106,15 +106,27 @@
                                         @enderror
                                       </div>
                                     </div> 
-                                    <div class="col col-md-4">
+                                    <div class="col col-md-2">
                                       <div class="form-group">
                                         <label class="control-label" for="dni">DNI:</label> 
-                                        <input autocomplete="off" class="mi-input form-control rounded custom"   type="text" name="dni" value={{old('dni')}}> 
+                                        <input autocomplete="off" class="mi-input form-control rounded custom"   type="number" name="dni" min="1" max="50000000" value={{old('dni')}}> 
                                         @error('dni')
                                         <small>*{{$message}}</small>
                                         @enderror
                                       </div>
+                                    </div>
+                                    
+                                    <div class="col col-md-2">
+                                      <div class="form-group">
+                                        <label class="control-label" for="rfid">RFID:</label> 
+                                        <input autocomplete="off" class="mi-input form-control rounded custom" type="number" name="rfid" min="0" max="999" value="{{ old('rfid') }}">
+ 
+                                        @error('rfid')
+                                        <small>*{{$message}}</small>
+                                        @enderror
+                                      </div>
                                     </div> 
+
                                     <div class="form-group">
                                       <label>&nbsp;</label> {{-- etiqueta vacía --}}
                                       <div>

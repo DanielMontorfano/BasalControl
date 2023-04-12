@@ -73,13 +73,19 @@ mi.input {
        margin-top: 10px;
        padding: 5px;
        border:4px;
-       /*width:400px; */
+       width: 80%; /* Cambia el valor para ajustar el ancho */
+      /* margin: 0 auto; /* Centra la tarjeta horizontalmente */
+       width:700px; */
        border-radius:10px;
        color:rgb(243, 230, 230);
        background-image: linear-gradient(to right top, #0e3761, #6d8198,#0e3761, #7b91ab);
        /*background: linear-gradient(to left, #0e3761, #9cbfe7);*/
       }
-  
+      
+
+.table {
+  width: 100%; /* Hace que la tabla ocupe todo el ancho disponible */
+}
    .card-img-top {
       width: 100%;
       height: 12vw;
@@ -104,6 +110,7 @@ h6 {
 
 @section('content_header')
     <h6>{{$persona->nyapellido}}</h6>
+    <a  class="btn btn-info ml-2  boton"  href="{{route('imprimirPersona', $persona->id)}}">imprimir</a>
 @stop
 
 @section('content')
@@ -169,6 +176,9 @@ h6 {
                   </tr>
                   <tr>
                     <td><strong>El destinatario de la carga fué: </strong> {{$ficha->cargaPara}}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Se le asignó el RFID: </strong> {{$persona->rfid}}</td>
                   </tr>
              </table>
             </div> 

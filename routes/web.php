@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\FichaController;
 use App\Http\Controllers\MaterialController;
-use App\Models\Persona;
-
+use App\Models\Persona; 
+use App\Http\Controllers\ImprimirController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +42,10 @@ Route::get('salida4/{personaId}', function($personaId){  //Sale con vehiculo con
     return view('personas.salida4', compact('persona',$persona->id, $persona->ficha_id));
 })->name('personas.salida4');
 Route::put('conSalida4', [PersonaController::class,'conSalida4'])->name('personas.conSalida4');
+
+//***********************IMPRESIONES***************************************************** */
+ 
+Route::get('/imprimirPersona/{persona}', [ImprimirController::class,'imprimirPersona'])->name('imprimirPersona');
 
 
 
