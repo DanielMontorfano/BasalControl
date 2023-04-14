@@ -45,7 +45,7 @@
                     <img src="{{ asset('iconos/sinCajaPng.png') }}" alt="Imagen" style="width: 200px; height: auto; margin-bottom: 20px;">
                     <div class="form-group d-flex justify-content-center">
                         <button form="nuevoMatrial" class="btn btn-info  boton" type="submit" >Si</button>
-                        <a  class="btn btn-info ml-2  boton"  href="">No</a>
+                        <a  class="btn btn-info ml-2  boton"  href="{{route('personas.index')}} ">No</a>
                       </div>
                 </div>
             </div>
